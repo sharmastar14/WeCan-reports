@@ -1,0 +1,13 @@
+.list {
+  flex: 1;
+  background-color: antiquewhite;
+  height: 100%;
+}
+.form {
+  flex: 1;
+  height: 100%;
+}
+
+.flex-even {
+  flex: 1;
+}
