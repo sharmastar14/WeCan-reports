@@ -7,4 +7,4 @@ const employees = [
   { name: "Suman", phone: null },
   { name: "Anjani", phone: "9841707850" },
 ];
-localStorage.setItem("employees", JSON.stringify(employees));
+//localStorage.setItem("employees", JSON.stringify(employees));
