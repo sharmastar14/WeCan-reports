@@ -45,7 +45,7 @@
       </div>
     </nav>
     <div class="container-fluid">
-      <div class="d-flex">
+      <div class="d-flex mt-4">
         <div class="list-group mb-4 flex-even">
           <a href="#" class="list-group-item list-group-item-action">
             Cras justo odio
@@ -66,8 +66,8 @@
         <div class="flex-even">Employee detail</div>
       </div>
       <div class="form">
-        <button class="btn btn-primary">Add Employee</button>
-        <form>
+        <button class="btn btn-outline-primary mb-3">Add New Employee +</button>
+        <form id="add-employee-form">
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <label for="name" class="input-group-text" id="basic-addon1"
@@ -81,6 +81,7 @@
               placeholder="Type employee name"
               aria-label="Type employee name"
               aria-describedby="basic-addon1"
+              required
             />
           </div>
           <div class="input-group mb-3">
@@ -97,9 +98,14 @@
               aria-describedby="basic-addon1"
             />
           </div>
+          <button class="btn btn-primary" type="submit" value="Submit">
+            Submit
+          </button>
         </form>
       </div>
     </div>
+    <script src="index.js"></script>
+
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
