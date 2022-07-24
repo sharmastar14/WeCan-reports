@@ -15,14 +15,55 @@
       integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
       crossorigin="anonymous"
     />
+    <link rel="stylesheet" href="styles.css" />
 
     <title>We-Can</title>
   </head>
   <body>
-    <h1>We-Can reports</h1>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-primary">
+      <a class="navbar-brand" href="#">
+        <h1>WeCan</h1>
+      </a>
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarText"
+        aria-controls="navbarText"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarText">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="pages/employee/index.html"
+              >Employee List <span class="sr-only">(current)</span></a
+            >
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="pages/reports/index.html">Reports</a>
+          </li>
+        </ul>
+        <span class="navbar-text"> WeCan Tech </span>
+      </div>
+    </nav>
+    <main
+      role="main"
+      class="inner cover d-flex justify-content-center flex-column align-items-center mt-4"
+    >
+      <h1 class="cover-heading">WeCan Technology</h1>
+      <p class="lead">
+        Cover is a one-page template for building simple and beautiful home
+        pages. Download, edit the text, and add your own fullscreen background
+        photo to make it your own.
+      </p>
+      <p class="lead">
+        <a href="#" class="btn btn-lg btn-secondary">Learn more</a>
+      </p>
+    </main>
 
-    <a href="pages/employee/index.html">EmployeeList</a>
-    <a href="pages/reports/index.html">Reports</a>
     <script src="scripts.js"></script>
 
     <!-- Optional JavaScript -->
