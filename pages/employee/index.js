@@ -2,6 +2,7 @@ const employeeListUL = document.getElementById("employee-list");
 const employees = JSON.parse(localStorage.getItem("employees")) ?? [];
 const addEmployeeForm = document.getElementById("add-employee-form");
 const employeeDetail = document.getElementById("employee-detail");
+const addClassForm = document.getElementById("add-class-form");
 
 function DisplayEmployees() {
   employeeListUL.innerHTML = "";
@@ -33,6 +34,7 @@ function DisplayEmployees() {
       isSelected ? "btn-outline-light" : "btn-outline-primary"
     );
     addClassBtn.textContent = "Add class +";
+
     const div = document.createElement("div");
     employeeListItem.textContent = employee.name;
     employeeListItem.appendChild(addClassBtn);
@@ -43,6 +45,7 @@ function DisplayEmployees() {
   });
 }
 DisplayEmployees();
+
 addEmployeeForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const employee = {
@@ -55,6 +58,12 @@ addEmployeeForm.addEventListener("submit", (e) => {
   localStorage.setItem("employees", JSON.stringify(employees));
   e.target.reset();
   DisplayEmployees();
+});
+
+addClassForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  console.log("daily updates submitted");
+  e.target.reset();
 });
 
 /*
