@@ -31,7 +31,7 @@ function DisplayEmployees() {
     badge.classList.add("badge", "badge-warning", "badge-pill", "mr-1");
     badge.textContent = "9";
     addClassBtn.setAttribute("data-toggle", "modal");
-    addClassBtn.setAttribute("data-target", "#exampleModal");
+    addClassBtn.setAttribute("data-target", "#addClassModal");
     addClassBtn.classList.add(
       "btn",
       "btn-sm",
@@ -67,6 +67,7 @@ addEmployeeForm.addEventListener("submit", (e) => {
   localStorage.setItem("employees", JSON.stringify(employees));
 
   e.target.reset();
+
   DisplayEmployees();
 });
 
@@ -80,8 +81,13 @@ addClassForm.addEventListener("submit", (e) => {
     className: getFormValueFromEvent(e, "className"),
     classType: getFormValueFromEvent(e, "classType"),
   };
-  console.log(classObj);
+  //reset form so that next time modal opens, I dont see the same values.
   e.target.reset();
+
+  //class obj is ready to store in local storage
+
+  //added jquery to hide modal after data is stored
+  $("#addClassModal").modal("hide");
 });
 
 /*
