@@ -94,6 +94,7 @@
         </form>
       </div>
     </div>
+
     <div
       class="modal fade"
       id="exampleModal"
@@ -105,14 +106,9 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLabel">
-              Add Class Taken
-            </h5>
+            <h5 class="modal-title" id="exampleModalLabel">Add Class Taken</h5>
 
-          <form id="add-class-form">
-            <! -- dropdown for school -->
-
-              <button
+            <button
               type="button"
               class="close"
               data-dismiss="modal"
@@ -121,60 +117,66 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="input-group mb-2 mt-2">
-            <div class="input-group-prepend">
-              <label class="input-group-text" for="inputGroupSelect01">Name Of School</label>
-            </div>
-            <select class="custom-select" id="inputGroupSelect01">
-              <option selected value="1">Fluorescent </option>
-              <option value="2">Angel Lord</option>
-            </select>
-          </div>
-
-          <! --input field for class  -->
-
-          <div class="input-group input-group-sm mb-2">
-            <div class="input-group-prepend">
-              <span class="input-group-text" id="inputGroup-sizing-sm"
-                >Class</span
+          <form id="add-class-form">
+            <input type="text" name="id" id="idInput" />
+            <div class="input-group mb-2 mt-2">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01"
+                  >Name Of School</label
+                >
+              </div>
+              <select
+                class="custom-select"
+                id="inputGroupSelect01"
+                name="schoolName"
               >
+                <option selected value="Fluorescent">Fluorescent</option>
+                <option value="Angel Lord">Angel Lord</option>
+              </select>
             </div>
-            <input
-              type="text"
-              class="form-control"
-              aria-label="Small"
-              aria-describedby="inputGroup-sizing-sm"
-            />
-          </div>
 
-          <! -- radio button for single/dual -->
+            <div class="input-group input-group-sm mb-2">
+              <div class="input-group-prepend">
+                <span class="input-group-text" id="inputGroup-sizing-sm"
+                  >Class</span
+                >
+              </div>
+              <input
+                type="text"
+                class="form-control"
+                name="className"
+                aria-label="Small"
+                aria-describedby="inputGroup-sizing-sm"
+              />
+            </div>
 
-          <div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
-            <label class="btn btn-outline-primary mr-3 ml-2 ">
-              <input
-                type="radio"
-                name="options"
-                id="option1"
-                autocomplete="off"
-                checked
-              />
-              Dual
-            </label>
-            <label class="btn btn-outline-primary">
-              <input
-                type="radio"
-                name="options"
-                id="option2"
-                autocomplete="off"
-              />
-              Single
-            </label>
-          </div>
-          <div class="modal-footer">
-            <button type="submit" class="btn btn-success ">
-            Save changes
-            </button>
-          </div>
+            <div class="btn-group btn-group-toggle mb-2" data-toggle="buttons">
+              <label class="btn btn-outline-primary mr-3 ml-2">
+                <input
+                  type="radio"
+                  name="classType"
+                  id="option1"
+                  autocomplete="off"
+                  value="dual"
+                />
+                Dual
+              </label>
+              <label class="btn btn-outline-primary">
+                <input
+                  type="radio"
+                  name="classType"
+                  id="option2"
+                  autocomplete="off"
+                  value="single"
+                />
+                Single
+              </label>
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-success">
+                Save changes
+              </button>
+            </div>
           </form>
         </div>
       </div>

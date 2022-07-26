@@ -1,3 +1,7 @@
+function getFormValueFromEvent(e, fieldname) {
+  return e.target.elements[fieldname].value;
+}
+
 const employeeListUL = document.getElementById("employee-list");
 const employees = JSON.parse(localStorage.getItem("employees")) ?? [];
 const addEmployeeForm = document.getElementById("add-employee-form");
@@ -33,7 +37,12 @@ function DisplayEmployees() {
       "btn-sm",
       isSelected ? "btn-outline-light" : "btn-outline-primary"
     );
+
     addClassBtn.textContent = "Add class +";
+    addClassBtn.addEventListener("click", (e) => {
+      const idInput = document.getElementById("idInput");
+      idInput.value = employee.id;
+    });
 
     const div = document.createElement("div");
     employeeListItem.textContent = employee.name;
@@ -56,6 +65,7 @@ addEmployeeForm.addEventListener("submit", (e) => {
   //console.log(employee);
   employees.push(employee);
   localStorage.setItem("employees", JSON.stringify(employees));
+
   e.target.reset();
   DisplayEmployees();
 });
@@ -63,6 +73,14 @@ addEmployeeForm.addEventListener("submit", (e) => {
 addClassForm.addEventListener("submit", (e) => {
   e.preventDefault();
   console.log("daily updates submitted");
+
+  const classObj = {
+    employeeId: getFormValueFromEvent(e, "id"),
+    schoolName: getFormValueFromEvent(e, "schoolName"),
+    className: getFormValueFromEvent(e, "className"),
+    classType: getFormValueFromEvent(e, "classType"),
+  };
+  console.log(classObj);
   e.target.reset();
 });
 
