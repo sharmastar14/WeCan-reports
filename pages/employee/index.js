@@ -25,7 +25,8 @@ function DisplayEmployees() {
     linkElement.classList.add(
       "d-flex",
       "justify-content-between",
-      "align-items-center"
+      "align-items-center",
+      isSelected ? "text-light" : undefined
     );
     employeeListItem.classList.add(
       "list-group-item",
