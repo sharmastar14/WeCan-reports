@@ -6,6 +6,9 @@ const employeeListUL = document.getElementById("employee-list");
 const addEmployeeForm = document.getElementById("add-employee-form");
 const employeeDetail = document.getElementById("employee-detail");
 const addClassForm = document.getElementById("add-class-form");
+const classDateInput = document.getElementById("classDate");
+
+classDateInput.value = new Date().toISOString().split("T")[0];
 
 //database
 const employees = JSON.parse(localStorage.getItem("employees")) ?? [];
@@ -29,7 +32,11 @@ function DisplayEmployees() {
       "list-group-item-action",
       isSelected ? "active" : undefined
     );
-    const link = window.location.href + "?id=" + employee.id;
+
+    const hostName = window.location.href.split("?")[0];
+    const link = hostName + "?id=" + employee.id;
+    //console.log(hostName);
+
     linkElement.href = link;
     const addClassBtn = document.createElement("button");
     const badge = document.createElement("span");
@@ -42,9 +49,15 @@ function DisplayEmployees() {
       "btn-sm",
       isSelected ? "btn-outline-light" : "btn-outline-primary"
     );
+    addClassBtn.type = "button";
 
     addClassBtn.textContent = "Add class +";
+    const classModal = document.getElementById("addClassModal");
+
     addClassBtn.addEventListener("click", (e) => {
+      classModal.classList.add("show");
+      e.preventDefault();
+      console.log("modal shown");
       const idInput = document.getElementById("idInput");
       idInput.value = employee.id;
     });
@@ -79,6 +92,7 @@ addEmployeeForm.addEventListener("submit", (e) => {
 addClassForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const classObj = {
+    classDate: getFormValueFromEvent(e, "classdate"),
     employeeId: getFormValueFromEvent(e, "id"),
     schoolName: getFormValueFromEvent(e, "schoolName"),
     className: getFormValueFromEvent(e, "className"),
@@ -125,4 +139,7 @@ const classes = [
     date: "2020-02-20",
   },
 ];
+
+label and date input didn't come in the same line
+ 
 */

@@ -118,6 +118,20 @@
             </button>
           </div>
           <form id="add-class-form" class="p-4">
+            <div class="input-group mb-2 mt-2">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="classdate">Date</label>
+              </div>
+              <input
+                type="date"
+                id="classDate"
+                class="form-control"
+                name="classdate"
+                aria-label="Small"
+                aria-describedby="inputGroup-sizing-sm"
+              />
+            </div>
+
             <input type="text" name="id" id="idInput" class="d-none" />
             <div class="input-group mb-2 mt-2">
               <div class="input-group-prepend">
@@ -135,7 +149,7 @@
               </select>
             </div>
 
-            <div class="input-group input-group-sm mb-2">
+            <div class="input-group input-group mb-2">
               <div class="input-group-prepend">
                 <span class="input-group-text" id="inputGroup-sizing-sm"
                   >Class</span
