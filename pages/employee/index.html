@@ -52,8 +52,12 @@
     <div class="container-fluid">
       <div class="d-flex mt-4">
         <ul id="employee-list" class="list-group mb-4 flex-even"></ul>
-        <div id="employee-detail" class="flex-even">Employee detail</div>
+        <div class="flex-even">
+          <div id="class-detail">Class Detail</div>
+          <ul id="class-list"></ul>
+        </div>
       </div>
+
       <div class="form">
         <button class="btn btn-primary mb-3">Add New Employee +</button>
         <form id="add-employee-form">
@@ -172,6 +176,7 @@
                   id="option1"
                   autocomplete="off"
                   value="dual"
+                  required
                 />
                 Dual
               </label>

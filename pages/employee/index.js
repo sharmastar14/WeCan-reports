@@ -1,25 +1,37 @@
+/*const classees = [
+  { name: "4a", id: 1323 },
+  { name: "4a", id: 1123 },
+  { name: "7a", id: 1223 },
+];
+classees.filter((bclass) => {
+  return bclass.id == 1123;
+});
+*/
+
 function getFormValueFromEvent(e, fieldname) {
   return e.target.elements[fieldname].value;
 }
-
+const params = new URLSearchParams(window.location.search); //query parameter
+let currentEmployeeId = params.get("id");
 const employeeListUL = document.getElementById("employee-list");
 const addEmployeeForm = document.getElementById("add-employee-form");
-const employeeDetail = document.getElementById("employee-detail");
 const addClassForm = document.getElementById("add-class-form");
 const classDateInput = document.getElementById("classDate");
-
-classDateInput.value = new Date().toISOString().split("T")[0];
+const classListUl = document.getElementById("class-list");
 
 //database
 const employees = JSON.parse(localStorage.getItem("employees")) ?? [];
 const classes = JSON.parse(localStorage.getItem("classes")) ?? [];
+const filteredClasses = classes.filter((aclass) => {
+  return aclass.employeeId == currentEmployeeId;
+});
+console.log(filteredClasses);
 
 function DisplayEmployees() {
   employeeListUL.innerHTML = "";
-  const params = new URLSearchParams(window.location.search);
-  employeeDetail.textContent = params.get("id");
+  //employeeDetail.textContent = params;
   employees.forEach((employee) => {
-    const isSelected = params.get("id") == employee.id;
+    const isSelected = currentEmployeeId == employee.id;
     const employeeListItem = document.createElement("li");
     const linkElement = document.createElement("a");
     linkElement.classList.add(
@@ -58,7 +70,8 @@ function DisplayEmployees() {
     addClassBtn.addEventListener("click", (e) => {
       classModal.classList.add("show");
       e.preventDefault();
-      console.log("modal shown");
+      classDateInput.value = new Date().toISOString().split("T")[0];
+
       const idInput = document.getElementById("idInput");
       idInput.value = employee.id;
     });
@@ -74,6 +87,17 @@ function DisplayEmployees() {
   });
 }
 DisplayEmployees();
+
+function displayClasses() {
+  classListUl.innerHTML = "";
+  filteredClasses.forEach((classs) => {
+    let listOfClass = document.createElement("li");
+    // console.log(classs.className);
+    listOfClass.innerHTML = classs.className;
+    classListUl.appendChild(listOfClass);
+  });
+}
+displayClasses();
 
 addEmployeeForm.addEventListener("submit", (e) => {
   e.preventDefault();
