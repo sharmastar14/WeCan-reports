@@ -17,15 +17,11 @@ const employeeListUL = document.getElementById("employee-list");
 const addEmployeeForm = document.getElementById("add-employee-form");
 const addClassForm = document.getElementById("add-class-form");
 const classDateInput = document.getElementById("classDate");
-const classListUl = document.getElementById("class-list");
+const classListTableBody = document.getElementById("class-list");
 
 //database
 const employees = JSON.parse(localStorage.getItem("employees")) ?? [];
 const classes = JSON.parse(localStorage.getItem("classes")) ?? [];
-const filteredClasses = classes.filter((aclass) => {
-  return aclass.employeeId == currentEmployeeId;
-});
-console.log(filteredClasses);
 
 function DisplayEmployees() {
   employeeListUL.innerHTML = "";
@@ -88,15 +84,38 @@ function DisplayEmployees() {
 }
 DisplayEmployees();
 
+{
+  /* <tr>
+  <th scope="row">1</th>
+  <td>Mark</td>
+  <td>Otto</td>
+  <td>@mdo</td>
+</tr>; */
+}
 function displayClasses() {
-  classListUl.innerHTML = "";
-  filteredClasses.forEach((classs) => {
-    let listOfClass = document.createElement("li");
-    // console.log(classs.className);
-    listOfClass.innerHTML = classs.className;
-    classListUl.appendChild(listOfClass);
+  const filteredClasses = classes.filter((aclass) => {
+    return aclass.employeeId == currentEmployeeId;
+  });
+  classListTableBody.innerHTML = "";
+  filteredClasses.forEach((classs, index) => {
+    let idData = index + 1;
+    let tableRow = document.createElement("tr");
+    let tableDataIndex = document.createElement("td");
+    let tableDataClassName = document.createElement("td");
+    let tableDataClassType = document.createElement("td");
+    let tableDataClassDate = document.createElement("td");
+    tableDataIndex.innerText = idData;
+    tableDataClassName.innerText = classs.className;
+    tableDataClassType.innerText = classs.classType;
+    tableDataClassDate.innerText = classs.classDate;
+    tableRow.appendChild(tableDataIndex);
+    tableRow.appendChild(tableDataClassName);
+    tableRow.appendChild(tableDataClassType);
+    tableRow.appendChild(tableDataClassDate);
+    classListTableBody.appendChild(tableRow);
   });
 }
+
 displayClasses();
 
 addEmployeeForm.addEventListener("submit", (e) => {
@@ -128,7 +147,7 @@ addClassForm.addEventListener("submit", (e) => {
 
   //reset form so that next time modal opens, I dont see the same values.
   e.target.reset();
-
+  displayClasses();
   //class obj is ready to store in local storage
 
   //added jquery to hide modal after data is stored

@@ -52,14 +52,22 @@
     <div class="container-fluid">
       <div class="d-flex mt-4">
         <ul id="employee-list" class="list-group mb-4 flex-even"></ul>
-        <div class="flex-even">
-          <div id="class-detail">Class Detail</div>
-          <ul id="class-list"></ul>
+        <div class="flex-even ml-4">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th scope="col">#</th>
+                <th scope="col">Name</th>
+                <th scope="col">Type</th>
+                <th scope="col">Class-Date</th>
+              </tr>
+            </thead>
+            <tbody id="class-list"></tbody>
+          </table>
         </div>
       </div>
 
       <div class="form">
-        <button class="btn btn-primary mb-3">Add New Employee +</button>
         <form id="add-employee-form">
           <div class="input-group mb-3">
             <div class="input-group-prepend">
