@@ -163,7 +163,7 @@ addClassForm.addEventListener("submit", (e) => {
   };
   classes.push(classObj);
   localStorage.setItem("classes", JSON.stringify(classes));
-
+  $("#addClassToast").toast("show");
   //reset form so that next time modal opens, I dont see the same values.
   e.target.reset();
   displayClasses();
