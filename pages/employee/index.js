@@ -1,12 +1,12 @@
-/*const classees = [
+const classees = [
   { name: "4a", id: 1323 },
   { name: "4a", id: 1123 },
   { name: "7a", id: 1223 },
 ];
-classees.filter((bclass) => {
-  return bclass.id == 1123;
+const filtered = classees.filter((bclass) => {
+  return bclass.id != 1123;
 });
-*/
+console.log(filtered);
 
 function getFormValueFromEvent(e, fieldname) {
   return e.target.elements[fieldname].value;
@@ -21,7 +21,7 @@ const classListTableBody = document.getElementById("class-list");
 
 //database
 const employees = JSON.parse(localStorage.getItem("employees")) ?? [];
-const classes = JSON.parse(localStorage.getItem("classes")) ?? [];
+let classes = JSON.parse(localStorage.getItem("classes")) ?? [];
 
 function DisplayEmployees() {
   employeeListUL.innerHTML = "";
@@ -92,6 +92,7 @@ DisplayEmployees();
   <td>@mdo</td>
 </tr>; */
 }
+
 function displayClasses() {
   const filteredClasses = classes.filter((aclass) => {
     return aclass.employeeId == currentEmployeeId;
@@ -104,6 +105,16 @@ function displayClasses() {
     let tableDataClassName = document.createElement("td");
     let tableDataClassType = document.createElement("td");
     let tableDataClassDate = document.createElement("td");
+    let tableDataDel = document.createElement("button");
+    tableDataDel.classList.add(
+      "btn",
+      "btn-outline-danger",
+      "btn-sm",
+      "mx-2",
+      "my-2"
+    );
+    tableDataDel.textContent = "Del";
+
     tableDataIndex.innerText = idData;
     tableDataClassName.innerText = classs.className;
     tableDataClassType.innerText = classs.classType;
@@ -112,7 +123,14 @@ function displayClasses() {
     tableRow.appendChild(tableDataClassName);
     tableRow.appendChild(tableDataClassType);
     tableRow.appendChild(tableDataClassDate);
+    tableRow.appendChild(tableDataDel);
     classListTableBody.appendChild(tableRow);
+
+    tableDataDel.addEventListener("click", (e) => {
+      classes = classes.filter((c) => c.id != classs.id);
+      localStorage.setItem("classes", JSON.stringify(classes));
+      displayClasses();
+    });
   });
 }
 
@@ -137,6 +155,7 @@ addClassForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const classObj = {
     classDate: getFormValueFromEvent(e, "classdate"),
+    id: Date.now(),
     employeeId: getFormValueFromEvent(e, "id"),
     schoolName: getFormValueFromEvent(e, "schoolName"),
     className: getFormValueFromEvent(e, "className"),
