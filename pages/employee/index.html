@@ -80,9 +80,11 @@
           </table>
         </div>
       </div>
+    </div>
 
-      <div class="form bg-transparent d-flex justify-content-center">
-        <form id="add-employee-form">
+    <footer class="form text-center text-lg-start">
+      <form id="add-employee-form">
+        <div class="d-flex flex-row p-3">
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <label for="name" class="input-group-text" id="basic-addon1"
@@ -99,6 +101,7 @@
               required
             />
           </div>
+          <div class="d-flex space-between"></div>
           <div class="input-group mb-3">
             <div class="input-group-prepend">
               <label class="input-group-text" id="basic-addon1"
@@ -114,12 +117,18 @@
               aria-describedby="basic-addon1"
             />
           </div>
-          <button class="btn btn-success" type="submit" value="Submit">
-            Submit
-          </button>
-        </form>
+        </div>
+        <button class="btn btn-success" type="submit" value="Submit">
+          Submit
+        </button>
+      </form>
+      <div
+        class="text-center p-3 mt-4"
+        style="background-color: rgba(0, 0, 0, 0.2)"
+      >
+        © 2022 Copyright:
       </div>
-    </div>
+    </footer>
 
     <div
       class="modal fade"
@@ -224,21 +233,17 @@
       </div>
     </div>
 
-    <div
-      aria-live="polite"
-      aria-atomic="true"
-      style="position: relative; min-height: 200px"
-    >
+    <div aria-live="polite" aria-atomic="true">
       <div
         id="addClassToast"
         class="toast"
-        data-delay="5000"
-        style="position: absolute; top: 0; right: 0"
+        style="position: fixed; top: 10px; right: 10px"
+        data-delay="50000"
       >
         <div class="toast-header">
-          <img src="..." class="rounded mr-2" alt="..." />
-          <strong class="mr-auto">Bootstrap</strong>
-          <small>11 mins ago</small>
+          <img src="#" class="rounded mr-2" />
+          <strong class="mr-auto">Add Class</strong>
+          <small>2s ago</small>
           <button
             type="button"
             class="ml-2 mb-1 close"
@@ -248,7 +253,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <div class="toast-body">Hello, world! This is a toast message.</div>
+        <div class="toast-body">Class added successfully!!</div>
       </div>
     </div>
 
