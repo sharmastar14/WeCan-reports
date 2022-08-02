@@ -1,45 +1,52 @@
-const classees = [
-  { name: "4a", id: 1323 },
-  { name: "4a", id: 1123 },
-  { name: "7a", id: 1223 },
-];
-const filtered = classees.filter((bclass) => {
-  return bclass.id != 1123;
-});
-console.log(filtered);
+"use strict";
 
 function getFormValueFromEvent(e, fieldname) {
   return e.target.elements[fieldname].value;
 }
+
+//params
 const params = new URLSearchParams(window.location.search); //query parameter
 let currentEmployeeId = params.get("id");
+
+//html selectors
 const employeeListUL = document.getElementById("employee-list");
 const addEmployeeForm = document.getElementById("add-employee-form");
 const addClassForm = document.getElementById("add-class-form");
 const classDateInput = document.getElementById("classDate");
 const classListTableBody = document.getElementById("class-list");
+const partnerContainerDiv = document.getElementById("partnerContainer");
+const partnerSelect = document.getElementById("partnerSelect");
+const classTypeRadios = document.getElementsByName("classType");
 
 //database
 const employees = JSON.parse(localStorage.getItem("employees")) ?? [];
 let classes = JSON.parse(localStorage.getItem("classes")) ?? [];
 
-const partnerSelect = document.getElementById("partnerSelect");
-employees.forEach((employee) => {
-  const partnerNAme = document.createElement("option");
-  partnerSelect.appendChild(partnerNAme);
-  partnerNAme.value = employee.id;
-  partnerNAme.textContent = employee.name;
-});
-
-const classTypeRadios = document.getElementsByName("classType");
-for (var i = 0; i < classTypeRadios.length; i++) {
-  classTypeRadios[i].addEventListener("change", function (e) {
-    if (e.target.value === "dual") {
-      partnerSelect.style.display = "block";
-    }
-    //console.log(e.target.value);
+function populateOptions(employeeId) {
+  const filteredEmployees = employees.filter((employee) => {
+    return employee.id != employeeId;
+  });
+  filteredEmployees.forEach((employee) => {
+    const partnerNameOption = document.createElement("option");
+    partnerSelect.appendChild(partnerNameOption);
+    partnerNameOption.value = employee.id;
+    partnerNameOption.textContent = employee.name;
   });
 }
+
+classTypeRadios.forEach((radio) => {
+  radio.addEventListener("change", function (e) {
+    if (e.target.value === "dual") {
+      partnerContainerDiv.classList.remove("d-none");
+      partnerContainerDiv.classList.add("d-flex");
+      partnerSelect.setAttribute("required", "");
+    } else {
+      partnerContainerDiv.classList.remove("d-flex");
+      partnerContainerDiv.classList.add("d-none");
+      partnerSelect.removeAttribute("required");
+    }
+  });
+});
 
 function DisplayEmployees() {
   employeeListUL.innerHTML = "";
@@ -82,12 +89,12 @@ function DisplayEmployees() {
     const classModal = document.getElementById("addClassModal");
 
     addClassBtn.addEventListener("click", (e) => {
-      classModal.classList.add("show");
       e.preventDefault();
+      classModal.classList.add("show");
       classDateInput.value = new Date().toISOString().split("T")[0];
-
       const idInput = document.getElementById("idInput");
       idInput.value = employee.id;
+      populateOptions(employee.id);
     });
 
     const div = document.createElement("div");
@@ -101,15 +108,6 @@ function DisplayEmployees() {
   });
 }
 DisplayEmployees();
-
-{
-  /* <tr>
-  <th scope="row">1</th>
-  <td>Mark</td>
-  <td>Otto</td>
-  <td>@mdo</td>
-</tr>; */
-}
 
 function displayClasses() {
   const filteredClasses = classes.filter((aclass) => {
@@ -161,14 +159,12 @@ addEmployeeForm.addEventListener("submit", (e) => {
     name: e.target.elements.name.value,
     phone: e.target.elements.phone.value,
   };
-  //console.log(employee);
   employees.push(employee);
   localStorage.setItem("employees", JSON.stringify(employees));
-
   e.target.reset();
-
   DisplayEmployees();
 });
+
 addClassForm.addEventListener("submit", (e) => {
   e.preventDefault();
   const classObj = {
@@ -181,6 +177,10 @@ addClassForm.addEventListener("submit", (e) => {
   };
   classes.push(classObj);
   localStorage.setItem("classes", JSON.stringify(classes));
+
+  if (classObj.classType === "dual") {
+  }
+
   $("#addClassToast").toast("show");
   //reset form so that next time modal opens, I dont see the same values.
   e.target.reset();
