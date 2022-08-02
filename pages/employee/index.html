@@ -51,7 +51,7 @@
       </div>
     </nav>
     <div class="container-fluid">
-      <div class="d-flex mt-4">
+      <div class="d-flex mt-4 screen-height">
         <ul id="employee-list" class="list-group mb-4 flex-even"></ul>
         <div class="flex-even ml-4">
           <div class="input-group mb-3">
@@ -198,7 +198,7 @@
                 aria-describedby="inputGroup-sizing-sm"
               />
             </div>
-            <div class="input-group mb-3 d-flex align-items-center">
+            <div class="input-group mb-1 d-flex align-items-center">
               <label class="input-group-text">Class Type</label>
               <label class="btn btn-outline-primary m-0 mx-2">
                 <input
@@ -222,6 +222,20 @@
                 Single
               </label>
             </div>
+            <div class="input-group mb-2 mt-2">
+              <div class="input-group-prepend">
+                <label class="input-group-text" for="inputGroupSelect01"
+                  >Partner</label
+                >
+              </div>
+              <select
+                class="custom-select d-none"
+                id="partnerSelect"
+                name="partnerName"
+              >
+                <option value="">Select one</option>
+              </select>
+            </div>
 
             <div class="modal-footer">
               <button type="submit" class="btn btn-success">
@@ -233,28 +247,25 @@
       </div>
     </div>
 
-    <div aria-live="polite" aria-atomic="true">
-      <div
-        id="addClassToast"
-        class="toast"
-        style="position: fixed; top: 10px; right: 10px"
-        data-delay="50000"
-      >
-        <div class="toast-header">
-          <img src="#" class="rounded mr-2" />
-          <strong class="mr-auto">Add Class</strong>
-          <small>2s ago</small>
-          <button
-            type="button"
-            class="ml-2 mb-1 close"
-            data-dismiss="toast"
-            aria-label="Close"
-          >
-            <span aria-hidden="true">&times;</span>
-          </button>
-        </div>
-        <div class="toast-body">Class added successfully!!</div>
+    <div
+      id="addClassToast"
+      class="toast"
+      style="position: fixed; top: 10px; right: 10px"
+      data-delay="5000"
+    >
+      <div class="toast-header">
+        <strong class="mr-auto">Add Class</strong>
+        <small>2s ago</small>
+        <button
+          type="button"
+          class="ml-2 mb-1 close"
+          data-dismiss="toast"
+          aria-label="Close"
+        >
+          <span aria-hidden="true">&times;</span>
+        </button>
       </div>
+      <div class="toast-body">Class added successfully!!</div>
     </div>
 
     <script src="index.js"></script>

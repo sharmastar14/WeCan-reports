@@ -23,6 +23,24 @@ const classListTableBody = document.getElementById("class-list");
 const employees = JSON.parse(localStorage.getItem("employees")) ?? [];
 let classes = JSON.parse(localStorage.getItem("classes")) ?? [];
 
+const partnerSelect = document.getElementById("partnerSelect");
+employees.forEach((employee) => {
+  const partnerNAme = document.createElement("option");
+  partnerSelect.appendChild(partnerNAme);
+  partnerNAme.value = employee.id;
+  partnerNAme.textContent = employee.name;
+});
+
+const classTypeRadios = document.getElementsByName("classType");
+for (var i = 0; i < classTypeRadios.length; i++) {
+  classTypeRadios[i].addEventListener("change", function (e) {
+    if (e.target.value === "dual") {
+      partnerSelect.style.display = "block";
+    }
+    //console.log(e.target.value);
+  });
+}
+
 function DisplayEmployees() {
   employeeListUL.innerHTML = "";
   //employeeDetail.textContent = params;
