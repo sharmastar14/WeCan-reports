@@ -23,7 +23,7 @@ const employees = JSON.parse(localStorage.getItem("employees")) ?? [];
 let classes = JSON.parse(localStorage.getItem("classes")) ?? [];
 
 function populateOptions(employeeId) {
-  const filteredEmployees = employees.filter((employee) => {
+  let filteredEmployees = employees.filter((employee) => {
     return employee.id != employeeId;
   });
   filteredEmployees.forEach((employee) => {
@@ -31,6 +31,7 @@ function populateOptions(employeeId) {
     partnerSelect.appendChild(partnerNameOption);
     partnerNameOption.value = employee.id;
     partnerNameOption.textContent = employee.name;
+    filteredEmployees = [];
   });
 }
 
@@ -89,6 +90,7 @@ function DisplayEmployees() {
     const classModal = document.getElementById("addClassModal");
 
     addClassBtn.addEventListener("click", (e) => {
+      partnerSelect.textContent = "";
       e.preventDefault();
       classModal.classList.add("show");
       classDateInput.value = new Date().toISOString().split("T")[0];
