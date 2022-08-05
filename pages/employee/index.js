@@ -1,5 +1,11 @@
 "use strict";
 
+function displayaapuwithherlover(lovername, percentage) {
+  console.log("aapu + ", lovername, "with love% ", percentage);
+}
+displayaapuwithherlover("pasu", "1");
+displayaapuwithherlover("puggu", "2");
+
 function getFormValueFromEvent(e, fieldname) {
   return e.target.elements[fieldname].value;
 }
@@ -17,12 +23,15 @@ const classListTableBody = document.getElementById("class-list");
 const partnerContainerDiv = document.getElementById("partnerContainer");
 const partnerSelect = document.getElementById("partnerSelect");
 const classTypeRadios = document.getElementsByName("classType");
+const classTypeFilter = document.getElementById("classTypeFilter");
 
 //database
 const employees = JSON.parse(localStorage.getItem("employees")) ?? [];
 let classes = JSON.parse(localStorage.getItem("classes")) ?? [];
 
 function populateOptions(employeeId) {
+  partnerSelect.textContent = "";
+
   let filteredEmployees = employees.filter((employee) => {
     return employee.id != employeeId;
   });
@@ -31,7 +40,6 @@ function populateOptions(employeeId) {
     partnerSelect.appendChild(partnerNameOption);
     partnerNameOption.value = employee.id;
     partnerNameOption.textContent = employee.name;
-    filteredEmployees = [];
   });
 }
 
@@ -90,7 +98,6 @@ function DisplayEmployees() {
     const classModal = document.getElementById("addClassModal");
 
     addClassBtn.addEventListener("click", (e) => {
-      partnerSelect.textContent = "";
       e.preventDefault();
       classModal.classList.add("show");
       classDateInput.value = new Date().toISOString().split("T")[0];
@@ -111,10 +118,20 @@ function DisplayEmployees() {
 }
 DisplayEmployees();
 
-function displayClasses() {
-  const filteredClasses = classes.filter((aclass) => {
-    return aclass.employeeId == currentEmployeeId;
-  });
+function displayClasses(classType) {
+  console.log(classType, "anjani");
+  let filteredClasses;
+  if (classType) {
+    filteredClasses = classes.filter((aclass) => {
+      return (
+        aclass.employeeId == currentEmployeeId && aclass.classType == classType
+      );
+    });
+  } else {
+    filteredClasses = classes.filter((aclass) => {
+      return aclass.employeeId == currentEmployeeId;
+    });
+  }
   classListTableBody.innerHTML = "";
   filteredClasses.forEach((classs, index) => {
     let idData = index + 1;
@@ -151,7 +168,6 @@ function displayClasses() {
     });
   });
 }
-
 displayClasses();
 
 addEmployeeForm.addEventListener("submit", (e) => {
@@ -180,9 +196,6 @@ addClassForm.addEventListener("submit", (e) => {
   classes.push(classObj);
   localStorage.setItem("classes", JSON.stringify(classes));
 
-  if (classObj.classType === "dual") {
-  }
-
   $("#addClassToast").toast("show");
   //reset form so that next time modal opens, I dont see the same values.
   e.target.reset();
@@ -191,6 +204,28 @@ addClassForm.addEventListener("submit", (e) => {
 
   //added jquery to hide modal after data is stored
   $("#addClassModal").modal("hide");
+});
+
+classTypeFilter.addEventListener("change", (e) => {
+  //const filteredClasses = classes.filter((aclass) => {
+  //  return aclass.employeeId == currentEmployeeId;
+  //classes
+  console.log(e.target.value);
+
+  //display all classes
+  if (e.target.value == "All..") {
+    displayClasses();
+  }
+
+  // filter by dual
+  else if (e.target.value == "dual") {
+    displayClasses("dual");
+  }
+
+  // filter by single
+  else if (e.target.value == "single") {
+    displayClasses("single");
+  }
 });
 
 /*
