@@ -1,10 +1,12 @@
 "use strict";
-
+/*
 function displayaapuwithherlover(lovername, percentage) {
+  //argument
   console.log("aapu + ", lovername, "with love% ", percentage);
 }
-displayaapuwithherlover("pasu", "1");
+displayaapuwithherlover("pasu", "1"); // parameter
 displayaapuwithherlover("puggu", "2");
+*/
 
 function getFormValueFromEvent(e, fieldname) {
   return e.target.elements[fieldname].value;
@@ -28,6 +30,21 @@ const classTypeFilter = document.getElementById("classTypeFilter");
 //database
 const employees = JSON.parse(localStorage.getItem("employees")) ?? [];
 let classes = JSON.parse(localStorage.getItem("classes")) ?? [];
+
+//nepali date picker
+
+/* Select your element */
+//const mainInput = document.getElementById("nepali-datepicker");
+/* Initialize Datepicker with options */
+//mainInput.nepaliDatePicker();
+
+window.onload = function () {
+  var mainInput = document.getElementById("nepali-datepicker");
+  mainInput.nepaliDatePicker({
+    language: "english",
+    container: "#addClassModal",
+  });
+};
 
 function populateOptions(employeeId) {
   partnerSelect.textContent = "";
@@ -78,7 +95,6 @@ function DisplayEmployees() {
 
     const hostName = window.location.href.split("?")[0];
     const link = hostName + "?id=" + employee.id;
-    //console.log(hostName);
 
     linkElement.href = link;
     const addClassBtn = document.createElement("button");
@@ -119,7 +135,7 @@ function DisplayEmployees() {
 DisplayEmployees();
 
 function displayClasses(classType) {
-  console.log(classType, "anjani");
+  //console.log(classType, "anjani");
   let filteredClasses;
   if (classType) {
     filteredClasses = classes.filter((aclass) => {
@@ -207,10 +223,7 @@ addClassForm.addEventListener("submit", (e) => {
 });
 
 classTypeFilter.addEventListener("change", (e) => {
-  //const filteredClasses = classes.filter((aclass) => {
-  //  return aclass.employeeId == currentEmployeeId;
-  //classes
-  console.log(e.target.value);
+  // console.log(e.target.value);
 
   //display all classes
   if (e.target.value == "All..") {
