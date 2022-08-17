@@ -33,7 +33,7 @@ employees.forEach((employee, index) => {
   let tableDataAmount = document.createElement("td");
   let noOfDualClasses = getNoOfDualClassesForEmployee(employee.id);
   let noOfSingleClasses = getNoOfSingleClassesForEmployee(employee.id);
-  let amountEarned = noOfDualClasses * 150 + noOfSingleClasses * 75;
+  let amountEarned = noOfDualClasses * 75 + noOfSingleClasses * 150;
 
   tableDataIndex.innerText = idData;
   tableDataEmployeeName.innerText = employee.name;

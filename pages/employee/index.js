@@ -47,13 +47,18 @@ window.onload = function () {
 };
 
 function populateOptions(employeeId) {
-  partnerSelect.textContent = "";
+  // partnerSelect.textContent = "";
+  //partnerSelect.options[0].value = "Select one";
+  partnerSelect.options[0].textContent = "Select one";
 
   let filteredEmployees = employees.filter((employee) => {
     return employee.id != employeeId;
   });
+
   filteredEmployees.forEach((employee) => {
     const partnerNameOption = document.createElement("option");
+
+    //partnerSelect.appendChild("Select one");
     partnerSelect.appendChild(partnerNameOption);
     partnerNameOption.value = employee.id;
     partnerNameOption.textContent = employee.name;
@@ -201,27 +206,42 @@ addEmployeeForm.addEventListener("submit", (e) => {
 
 addClassForm.addEventListener("submit", (e) => {
   e.preventDefault();
-  const classObj = {
+  const classType = getFormValueFromEvent(e, "classType");
+  let classObj = {
     classDate: getFormValueFromEvent(e, "classdate"),
-    id: Date.now(),
+    id: Date.now(), //class id
     employeeId: getFormValueFromEvent(e, "id"),
     schoolName: getFormValueFromEvent(e, "schoolName"),
     className: getFormValueFromEvent(e, "className"),
-    classType: getFormValueFromEvent(e, "classType"),
+    classType,
   };
   classes.push(classObj);
   localStorage.setItem("classes", JSON.stringify(classes));
 
+  //console.log(dualoption.value);
+
+  if (classType == "dual") {
+    let partnerClassObj = {
+      ...classObj,
+      id: Date.now(),
+      employeeId: getFormValueFromEvent(e, "partnerName"),
+    };
+    //console.log("dual selected");
+    classes.push(partnerClassObj);
+    localStorage.setItem("classes", JSON.stringify(classes));
+    displayClasses();
+  }
+
   $("#addClassToast").toast("show");
+
   //reset form so that next time modal opens, I dont see the same values.
   e.target.reset();
   displayClasses();
-  //class obj is ready to store in local storage
 
   //added jquery to hide modal after data is stored
   $("#addClassModal").modal("hide");
 });
-
+console;
 classTypeFilter.addEventListener("change", (e) => {
   // console.log(e.target.value);
 
